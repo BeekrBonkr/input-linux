@@ -69,9 +69,17 @@ sudo tee "$TEMP_FILE" >/dev/null <<EOF
 #   Work Louder: $VENDOR_WORKLOUDER
 #   Nomad legacy: $VENDOR_NOMAD
 
-# HID (hidraw) devices – keyboards, macropads, BLE HID, USB HID
+# USB HID (hidraw) devices – wired keyboards, macropads
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="$VENDOR_WORKLOUDER", MODE="0666", GROUP="$UDEV_GROUP", TAG+="uaccess"
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="$VENDOR_NOMAD",     MODE="0666", GROUP="$UDEV_GROUP", TAG+="uaccess"
+
+# Bluetooth HID (HID-over-GATT) devices.
+# A BLE hidraw node has NO USB parent, so the ATTRS{idVendor} rules above can
+# never match it — this is why configuring over Bluetooth fails. Match the
+# Bluetooth HID parent kernel name instead: bus 0005 = BUS_BLUETOOTH, and the
+# VID/PID in the kernel name are formatted as UPPERCASE hex.
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:${VENDOR_WORKLOUDER^^}:*", MODE="0666", GROUP="$UDEV_GROUP", TAG+="uaccess"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0005:${VENDOR_NOMAD^^}:*",     MODE="0666", GROUP="$UDEV_GROUP", TAG+="uaccess"
 
 # USB generic access for current and future devices (matches interface-level)
 SUBSYSTEM=="usb", ATTR{idVendor}=="$VENDOR_WORKLOUDER", MODE="0666", GROUP="$UDEV_GROUP"
