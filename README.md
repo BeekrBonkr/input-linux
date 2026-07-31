@@ -23,6 +23,16 @@ By using, copying, modifying, or distributing this software, **you agree to thes
 
 ## Installation
 
+Input is intended to be installed and managed with [Gear Lever](https://flathub.org/apps/it.mijorus.gearlever). Input does not create it's own desktop file if the appimage is run independently.
+
+You may need FUSE for the AppImage to run:
+
+```bash
+# Ubuntu/Debian
+sudo apt install libfuse2
+```
+
+You can also run Input standalone: 
 Download the latest `.AppImage` from the [Releases Page](https://github.com/worklouder/input-linux/releases).
 
 Make it executable and run it:
@@ -32,20 +42,11 @@ chmod +x Input-*.AppImage
 ./Input-*.AppImage
 ```
 
-For desktop integration (menu entries, updates), we recommend a tool like [Gear Lever](https://flathub.org/apps/it.mijorus.gearlever).
-
-You may need FUSE for the AppImage to run:
-
-```bash
-# Ubuntu/Debian
-sudo apt install libfuse2
-```
-
 ---
 
 ## Device Access (udev rules)
 
-Input should automatically set up the udev rules needed to access your Work Louder device on first launch. If your device isn't detected, **unplug and replug it** after launching the app once.
+Input should automatically prompt you to set up the udev rules needed to access your Work Louder device on first launch. If your device isn't detected, **unplug and replug it** after launching the app once.
 
 ---
 
