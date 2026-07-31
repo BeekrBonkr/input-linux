@@ -1,5 +1,9 @@
 # Input - Linux Version
 
+Unofficial community builds of the Work Louder **Input** app for Linux, distributed as AppImages.
+
+This repository is used to publish Linux releases of Input. The app itself is **closed source** — no source code is hosted here. It is a **community build**, maintained on a best-effort basis with **no support promised**.
+
 ## ⚠️ Disclaimer
 
 This project is an **unofficial community-developed** port of the Input application, intended for use on Linux systems.
@@ -17,115 +21,49 @@ By using, copying, modifying, or distributing this software, **you agree to thes
 
 ---
 
-## Usage
+## Installation
 
-You have two options for using Input on Linux:
+Download the latest `.AppImage` from the [Releases Page](https://github.com/worklouder/input-linux/releases).
 
-### Option 1: Download Prebuilt AppImage
-
-The easiest way to get started is by visiting the [Releases Page](https://github.com/worklouder/input-linux/releases) and downloading the latest `.AppImage`.
-
-Make the AppImage executable and run it:
-
-We recommend using a tool like [Gear Lever](https://flathub.org/apps/it.mijorus.gearlever)
-
-You may need FUSE in order for the AppImage to run.
+Make it executable and run it:
 
 ```bash
-sudo apt install libfuse2
 chmod +x Input-*.AppImage
 ./Input-*.AppImage
 ```
 
----
+For desktop integration (menu entries, updates), we recommend a tool like [Gear Lever](https://flathub.org/apps/it.mijorus.gearlever).
 
-### Option 2: Build It Yourself
-
-This option is for users who want to rebuild the application from the official Windows installer.
-
-### Requirements
-
-Before running the setup script, ensure the following tools are installed and accessible in your `$PATH`:
-
-| Tool             | Purpose                                         | Ubuntu/Debian Install Command                         |
-|------------------|--------------------------------------------------|--------------------------------------------------------|
-| `curl`           | Download files over HTTP(S)                      | `sudo apt install curl`                               |
-| `7z`             | Extract `.exe` and `.7z` archives (`p7zip-full`) | `sudo apt install p7zip-full`                         |
-| `node`           | JavaScript runtime                               | `sudo apt install nodejs`                             |
-| `npm`            | Node.js package manager                          | `sudo apt install npm`                                |
-| `asar`           | Extract and repack `.asar` Electron archives     | `sudo npm install -g asar`                            |
-| `build-essential`| Required for compiling native modules            | `sudo apt install build-essential`                    |
-| `python3.11`     | Compatible Python version with venv support      | `sudo apt install python3.11 python3.11-venv`         |
-| `git`            | Used to clone the repository (optional)          | `sudo apt install git`                                |
-
-Install them all in one step:
+You may need FUSE for the AppImage to run:
 
 ```bash
-sudo apt update
-sudo apt install curl p7zip-full nodejs npm build-essential python3.11 python3.11-venv git
-sudo npm install -g asar
+# Ubuntu/Debian
+sudo apt install libfuse2
 ```
 
 ---
 
-### 🛠️ Build Process
+## Device Access (udev rules)
 
-The setup script now:
-
-- Creates a virtualenv with Python 3.11+ to ensure a compatible `distutils` environment
-- Installs `setuptools` and a shim for `distutils` to work with modern Python
-- Rebuilds native modules like `node-hid` using the patched environment
-- Applies community patches into `./input-app/`
-- Launches the app with Electron
-
-Run it:
-
-```bash
-git clone https://github.com/worklouder/input-linux.git
-cd input-linux
-bash input4linux-0.8.2.sh
-```
-
-Launch the app:
-
-```bash
-./input-app/start.sh
-```
+Input should automatically set up the udev rules needed to access your Work Louder device on first launch. If your device isn't detected, **unplug and replug it** after launching the app once.
 
 ---
 
-## Optional: Udev Rule Setup
+## Support
 
-Install the necessary udev rules to allow access to your Work Louder device:
+**No official support is provided** — not by Work Louder, and none is promised by the maintainer.
 
-Input *should* automatically create these for you.
+For community help, questions, and discussion, join the Discord server:
 
-```bash
-curl -sSL https://raw.githubusercontent.com/worklouder/input-linux/main/patch/dist-electron/scripts/install-udev-worklouder.sh | sudo bash
-```
+👉 **[https://discord.gg/yD9ay7sEdt](https://discord.gg/yD9ay7sEdt)**
 
-Afterward, **unplug and replug your keyboard** before launching the app.
+Issues opened on this repository may be addressed on a best-effort basis, but there is no guarantee of a response or fix.
 
 ---
 
-## Troubleshooting
+## About the Legacy Build Script
 
-- If `node-hid` fails to build and you’re using Python 3.12 or newer, ensure the build script properly activates its virtualenv.
-- Use Python 3.11+ for best compatibility with `node-gyp`.
-- If the app launches but doesn’t detect your device, ensure udev rules are installed (see above).
-- The build script defaults to `TEST_MODE=true`, which skips over non-critical errors. You can run it in strict mode like this:
-
-```bash
-TEST_MODE=false ./input4linux-0.8.2.sh
-```
-
-- If you were previously using `npm config set python`, that’s no longer needed. The build script uses `export PYTHON=...` automatically now.
-
----
-
-## Contributions
-
-Pull requests are welcome. This project is maintained on a best-effort basis by the community.
+Earlier versions of this repository provided a script (`input4linux-*.sh`) that downloaded the official Windows installer and patched it to run on Linux. That approach is **deprecated and no longer maintained** — use the AppImages from the Releases page instead.
 
 ---
 
