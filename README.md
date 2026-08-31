@@ -89,7 +89,7 @@ The Linux build targets full parity with the official app. Current status:
 | Radial menu and cheat sheet overlays | ✅ Full |     |
 | Smart actions: open app, open URL, run command | ✅ Full | App list includes Flatpak and Snap apps |
 | Smart action: insert text | ⚠️ Partial | Requires `xdotool`; on Wayland it can only type into XWayland windows |
-| Focused-app detection (app-linked profiles) | ⚠️ Varies by desktop | Solid on X11, GNOME, Hyprland and Sway; see desktop notes above |
+| Focused-app detection (app-linked profiles) | ⚠️ Varies by desktop | On GNOME Wayland this requires installing a few extra tools (see desktop notes above); solid elsewhere on X11, Hyprland and Sway |
 | Tray icon | ✅ Full | GNOME needs the AppIndicator extension |
 | Autostart | ✅ Full | XDG autostart entry, managed by the app |
 | Notifications and alerts | ✅ Full |     |
