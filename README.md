@@ -61,6 +61,17 @@ Most differences between setups come from the desktop environment and display se
 - **Hyprland / Sway**: focus detection uses the compositor's own IPC and works out of the box. You'll need a tray-capable bar (waybar etc.) and a polkit agent running.
 - **XFCE / Cinnamon / MATE (X11)**: everything works out of the box.
 
+### Automatic compatibility detection
+
+You generally don't need to work the tables above out by hand. Input inspects your
+distro, desktop environment and display server at runtime, figures out which features
+your setup can support, and prompts you when a third-party tool or extension would
+unlock one. On first launch it offers to install the udev rules it needs for device
+access, and when a feature such as focused-app detection needs extra help (for example
+a GNOME extension or `kdotool` on KDE Wayland), the app points you at the right tool
+at the moment you try to use it. The sections above are there as a reference if you
+prefer to set things up ahead of time or something goes wrong.
+
 ---
 
 ## Feature parity with Windows / macOS
